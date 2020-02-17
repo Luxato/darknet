@@ -264,6 +264,12 @@ void train_detector(char *datacfg, char *cfgfile, char *weightfile, int *gpus, i
         }
         printf("\n %d: %f, %f avg loss, %f rate, %lf seconds, %d images\n", get_current_batch(net), loss, avg_loss, get_current_rate(net), (what_time_is_it_now() - time), i*imgs);
 
+        FILE *fp;
+
+        fp = fopen("../file.txt", "ab+");
+        fprintf(fp ,"\n %d: %f, %f avg loss, %f rate, %lf seconds, %d images\n", get_current_batch(net), loss, avg_loss, get_current_rate(net), (what_time_is_it_now() - time), i*imgs);
+        fclose(fp);
+
         int draw_precision = 0;
         if (calc_map && (i >= next_map_calc || i == net.max_batches)) {
             if (l.random) {
