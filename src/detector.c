@@ -266,7 +266,7 @@ void train_detector(char *datacfg, char *cfgfile, char *weightfile, int *gpus, i
 
         FILE *fp;
 
-        fp = fopen("./gdrive/My drive/yolov3/file.txt", "ab+");
+        fp = fopen("../mydrive/yolov3/file.txt", "ab+");
         fprintf(fp ,"\n %d: %f, %f avg loss, %f rate, %lf seconds, %d images\n", get_current_batch(net), loss, avg_loss, get_current_rate(net), (what_time_is_it_now() - time), i*imgs);
         fclose(fp);
 
