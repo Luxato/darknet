@@ -265,7 +265,6 @@ void train_detector(char *datacfg, char *cfgfile, char *weightfile, int *gpus, i
         printf("\n %d: %f, %f avg loss, %f rate, %lf seconds, %d images\n", get_current_batch(net), loss, avg_loss, get_current_rate(net), (what_time_is_it_now() - time), i*imgs);
 
         FILE *fp;
-
         fp = fopen("../mydrive/yolov3/file.txt", "ab+");
         fprintf(fp ,"\n %d: %f, %f avg loss, %f rate, %lf seconds, %d images\n", get_current_batch(net), loss, avg_loss, get_current_rate(net), (what_time_is_it_now() - time), i*imgs);
         fclose(fp);
@@ -295,6 +294,12 @@ void train_detector(char *datacfg, char *cfgfile, char *weightfile, int *gpus, i
             iter_map = i;
             mean_average_precision = validate_detector_map(datacfg, cfgfile, weightfile, 0.25, 0.5, 0, net.letter_box, &net_map);// &net_combined);
             printf("\n mean_average_precision (mAP@0.5) = %f \n", mean_average_precision);
+
+            FILE *fp;
+            fp = fopen("../mydrive/yolov3/file.txt", "ab+");
+            printf(fp, "\n mean_average_precision (mAP@0.5) = %f \n", mean_average_precision);
+            fclose(fp);
+
             if (mean_average_precision > best_map) {
                 best_map = mean_average_precision;
                 printf("New best mAP!\n");
